@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { font-feature-settings:"liga" 1,"tnum" 1; }
+
+/* Distortion mask utility */
+.mask-wavy {
+  -webkit-mask-image: radial-gradient(circle at 50% 50%,#000 40%,transparent 70%);
+  mask-image: radial-gradient(circle at 50% 50%,#000 40%,transparent 70%);
+}
+
+/* Reusable transition distortion wrapper */
+.distort-on-enter[data-active="true"] {
+  filter: url(#distort);
+  transition: filter 1.2s cubic-bezier(.4,.8,.2,1);
+}
+
+.distort-on-enter[data-active="done"] {
+  filter: none;
+}
+
+/* Custom section reveal using clip + scale */
+.section-reveal { opacity:0; transform:translateY(40px) scale(.98); clip-path:inset(12% round 32px); }
+.section-reveal.is-visible { opacity:1; transform:translateY(0) scale(1); clip-path:inset(0 round 0); transition:all 1s cubic-bezier(.4,.8,.2,1); }
+
+.bg-noise:before {
+  content:""; position:fixed; inset:0; pointer-events:none; mix-blend-mode:overlay; opacity:.05; background-image: repeating-conic-gradient(from 45deg,#000 0deg,#000 2deg,transparent 4deg,transparent 6deg);
+}
